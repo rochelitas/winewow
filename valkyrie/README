@@ -1,0 +1,28 @@
+PREREQUISITES:
+  installed and available Wine (wine-staging is preferred)
+  valkyrie wow unzipped in the directory ./valkyrie-wow/
+    required subdirectories: Data, Documentation, Fonts, WDB, WTF
+    required files: WoW.exe DivxDecoder.dll dbghelp.dll 
+                  fmod.dll ij15.dll unicows.dll
+                  realmlist.wtf
+OPTIONAL:
+  installed python 2.7
+  installed and available winetricks
+
+CREATE CLIENT INSTANCE:
+  vlk_clreate.sh <instance name>
+  (creates subdirectory vlk_<instance name> 
+   and script vlk_run_<instance name>.sh)
+  example:
+    ./vlk_create.sh zelibober
+    
+LAUNCH CLIENT:
+  vlk_run_<instance name>.sh
+  example:
+    ./vlk_run_zelibober.sh
+
+BACKUP ALL INSTANCES STATES:
+  zip_state-all.sh
+  example:
+    ./zip_state-all.sh
+    

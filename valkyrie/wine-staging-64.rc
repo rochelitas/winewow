@@ -1,0 +1,36 @@
+#! /bin/bash
+BaseDir="$(dirname $(readlink -f $0) )"
+WineProfile="$BaseDir/.wine-staging-64"
+if [ ! "x$Suffix" = "x" ]; then
+  WineProfile="$WineProfile-$Suffix"
+fi
+
+
+wine="/opt/wine-staging/bin/wine64"
+winecfg="/opt/wine-staging/bin/winecfg"
+regedit="/opt/wine-staging/bin/regedit"
+
+export WINEARCH="win64"
+export WINEPREFIX="$WineProfile"
+
+export ALSA_DEFAULT_PCM="plug:dmix"
+export PULSE_LATENCY_MSEC=30
+
+export HTTP_PROXY=
+export HTTPS_PROXY=
+export http_proxy=
+export https_proxy=
+
+export LANGUAGE="ru_RU"
+export LANG="ru_RU.UTF-8"
+for n in CTYPE COLLATE MESSAGES NAME ALL ; do
+  export LC_${n}="$LANG"
+done
+
+export drive_c=$WINEPREFIX/drive_c
+
+if [ ! -d $drive_c ]; then
+  echo "initialize wine instance af WINEPREFIX \"$WINEPREFIX\" ..."
+  wine wineboot
+  winetricks sandbox
+fi
